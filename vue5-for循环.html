@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body id="demo">
+	<!-- 数组v-for -->
+	<ul>
+		<li v-for="item in items">
+			{{item.message}}---{{$index}}
+		</li>
+	</ul>
+	<button v-on:click="del">del</button>
+	<ul>
+		<li v-for="(index,item) in items">
+			{{item.message}}---{{index}}
+		</li>
+	</ul>
+	<ul>
+		<template v-for="(index,item) in items">
+			<li>{{item.message}}</li>
+			<li>{{index}}</li>
+		</template>
+	</ul>
+	<ul>
+		<li v-for="arr in arrs">new--{{arr.message}}</li>
+	</ul>
+	<!-- 数组变动检测  push() pop() shift() unshift() splice() sort() reverse() -->
+	<!-- 对象v-for 可以访问$index $key -->
+	<ul>
+		<li v-for="value in object">
+			{{$key}}:{{value}}
+		</li>
+	</ul>
+	<ul>
+		<li v-for="(key,val) in object">
+			{{key}}:{{val}}
+		</li>
+	</ul>
+	<!-- 值域v-for 可以接受一个整数，此时他将重复模板数次 -->
+	<div>
+		<span v-for="n in 10">{{n}}</span>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#demo",
+			data:{
+				items:[
+					{message:'Foo'},
+					{message:'Bar'},
+					{message:'Bar'}
+				],
+				object:{
+					firstname:'john',
+					lastname:'doe',
+					age:30
+				},
+				arrs:[]
+			},
+			methods:{
+				del:function(){
+					alert();
+					this.items.$remove({message:'Foo'})
+				}
+			}
+		});
+		/*修改原始数组*/
+		/*vm.items.push({message:'me'});
+		vm.items.pop();//末尾删除
+		vm.items.shift();//删除第一个
+		vm.items.unshift({message:'unshift'});//数组开始删除
+		vm.items.splice(1);//截取
+		vm.items.sort();//正序
+		vm.items.reverse();//反序*/
+		/*filter() concat() slice() 不会修改原始数组而是返回一个新数组*/
+		vm.arrs = vm.items.filter(function(item){
+			return item.message.match(/Foo/g);
+		});
+		/*str.match(字符串或者正则表达式)，返回匹配的值，正则表达式是否有g，返回的是数组
+		没有g时，匹配第一个，有g会匹配所有的
+		  str.indexOf() 返回指定的位置index
+		  str.lastIndexOf() 返回指定的位置index 
+		  str.replace(字符串和正则表达式)替换
+		  str.substring(start,stop) 起始和结束的位置，不可以使用负数
+		  str.slice(start,stop) 起始位置和结束位置，可以使用负数
+		  str.substr(start,length) 起始位置和截取的长度
+		*/
+		var str="helloabc1de3f5HEllo";
+		var newstr1 = str.match("hello");
+		console.log(newstr1);
+		/*["hello", index: 6, input: "abcdefhello"]*/
+		var newstr2 = str.match(/\d/g);
+		console.log(newstr2);/*[1,3,5]*/
+		var newstr3 = str.replace("hello","HELLO");
+		console.log(newstr3);
+		var newstr4 = str.replace(/hello/g,"Hello");
+		console.log(newstr4);
+		var newstr5 = str.replace(/hello/i,"Hello");
+		console.log(newstr5);
+
+
+	</script>
+</body>
+</html>

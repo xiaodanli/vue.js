@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.red{
+			color:red;
+		}
+		.blue{
+			color:blue;
+		}
+		.yellow{
+			background-color: yellow;
+		}
+	</style>
+</head>
+<body id="demo">
+	<!-- class对象语法  -->
+	<div v-bind:class="{red:false,blue:true}">class对象语法</div>
+	<!-- class数组语法 -->
+	<div v-bind:class="[red,{yellow:false}]">class数组语法</div>
+	<div v-bind:class='[blue,false?red:yellow]'>class数组语法</div>
+
+	<!-- style对象语法 -->
+	<div v-bind:style="{color:orange,fontSize:fontsize +'px'}">style对象语法</div>
+	<div v-bind:style="[styleObject]">style数组语法</div>
+	<div v-bind:style=""></div>
+	<script src="vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#demo",
+			data:{
+				red:'red',
+				yellow:'yellow',
+				blue:'blue',
+				orange:'orange',
+				fontsize:"20",
+				styleObject:{
+					color:'red',
+					background:'green',
+					transform:'translateX(100px)'
+				}
+			}
+		});
+	</script>
+</body>
+</html>

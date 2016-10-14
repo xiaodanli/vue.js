@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body id="demo">
+	<div>{{fullname}}</div>
+	<input type="text" v-model="firstname">
+	<input type="text" v-model="lastname">
+	<script src="vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#demo",
+			data:{
+				firstname:"Foo",
+				lastname:"Bar"
+			},
+			computed:{
+				fullname:{
+					get:function(){
+						return this.firstname + " " +this.lastname;
+					},
+					set:function(newValue){
+						var names = newValue.split(" ");
+						this.firstname = names[0];
+						this.lastname = names[names.length - 1];
+					}
+				}
+			}
+		});
+		// 命令式的重复
+		/*vm.$watch("firstname",function(val){
+			this.fullname = val + ' '+this.lastname;
+		});
+		vm.$watch("lastname",function(val){
+			this.fullname = this.firstname + ' '+val;
+		});*/
+		
+		
+	</script>
+</body>
+</html>

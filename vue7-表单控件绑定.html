@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body id="demo">
+    <span>message is :{{message}}</span>
+    <input type="text" v-model="message" placeholder="edit me">
+    <!-- checkbox -->
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{checked}}</label>
+    <br>
+    <!-- 多个复选框 -->
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames | json }}</span>
+    <br>
+    <!-- 单选 -->
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+    <br>
+    <!-- select-->
+    <!--  <select v-model="selected">
+        <option selected>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>Selected: {{ selected }}</span> -->
+    <!-- <br>
+    <select v-model="selected" multiple>
+        <option selected>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>Selected: {{ selected | json}}</span> -->
+    <!-- <br>
+	<select v-model="selected">
+		<option v-for="option in options" v-bind:value="option.value">
+			{{option.text}}
+		</option>
+	</select>
+	<span>Selected:{{selected}}</span> -->
+    <br>
+    <input type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b" checked>
+    <span>{{toggle}}</span>
+    <br>
+    <input type="radio" v-model="pick" v-bind:value="a" name="one">
+    <input type="radio" v-model="pick" v-bind:value="b" name="one">
+    <span>{{pick}}</span>
+    <br>
+    <select v-model="selected">
+        <option v-for="option in options" v-bind:value="option.value">{{option.text}}</option>
+    </select>
+    <span>{{selected}}</span>
+    <br>
+    <input v-model="age" number>
+    <span>{{age}}</span>
+    <br>
+    <select v-model="selected" options="myOptions"></select>
+    <input v-model="msg" debounce="500">
+    <span>{{msg}}</span>
+    <script src="vue.js"></script>
+    <script>
+    var vm = new Vue({
+            el: "#demo",
+            data: {
+                name: 'vue.js',
+                checkedNames: [],
+                picked: '',
+                selected: 'C',
+                options: [{
+                    text: 'One',
+                    value: 'A'
+                }, {
+                    text: 'Two',
+                    value: 'B'
+                }, {
+                    text: 'Three',
+                    value: 'C'
+                }],
+                a: 'true1',
+                b: 'false1',
+                toggle: true,
+                myOptions: [{
+                    label: 'A',
+                    options: ['a', 'b']
+                }, {
+                    label: 'B',
+                    options: ['c', 'd']
+                }],
+                msg: ""
+            },
+            methods: {
+                greet: function(event) {
+                    alert("hello" + vm.name + '!');
+                    alert(event.target.tagName); //event是原生的DOM事件
+                },
+                say: function(txt, event) {
+                    //现在可以访问原生的事件对象
+                    event.preventDefault();
+                    alert(txt);
+                },
+                doThis: function() {
+
+                },
+                onsubmit: function() {
+
+                },
+                doThat: function() {
+                    alert("只在父元素触发");
+                }
+            }
+        })
+        //vm.greet();
+    </script>
+</body>
+
+</html>

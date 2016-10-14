@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body id="demo">
+	<!-- v-show和v-if的区别是：v-if有更高的切换消耗，v-show有更高的初始化消耗 
+	建议：在有频繁切换时，使用v-show比较好，反之使用v-if比较好
+	-->
+	<template  v-if="ok">
+		<div>yes</div>
+		<div>yes</div>
+		<div>yes</div>
+	</template>
+	<h1 v-else>no</h1>
+	<div v-show="ok">show</div>
+	<!-- v-show不支持template标签 -->
+	<template v-show="ok">
+		<div>show</div>
+		<div>show</div>
+		<div>show</div>
+	</template>
+	<script src="vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#demo",
+			data:{
+				ok:true
+			}
+		});
+	</script>
+</body>
+</html>

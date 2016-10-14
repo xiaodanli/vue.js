@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.red{
+			background-color: yellow;
+			width:100px;
+			height:100px;
+		}
+	</style>
+</head>
+<body id="demo">
+	<div id="example">
+		<button v-on:click="greet">Green</button>
+		<button @click="greet">@</button>
+		<button v-on:click="say('hi',$event)">say</button>
+		<!-- 事件修饰符 -->
+		<a v-on:click.stop="doThis"></a>
+		<!-- 提交事件不在重载页面 -->
+		<form v-on:submit.prevent="onsubmit">
+			<input type="submit" value="submit">
+		</form>
+		<!-- 修饰符可以串联 -->
+		<a v-on:click.stop.prevent="doThat">doThit</a>
+		<!-- 只有修饰符 -->
+		<form v-on:submit.prevent>doThit</form>
+		<!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 -->
+		<div v-on:click.self="doThat" class="red">
+			父元素
+			<div>子元素</div>
+		</div>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#example",
+			data:{
+				name:'vue.js'
+			},
+			methods:{
+				greet:function(event){
+					alert("hello"+vm.name + '!');
+					alert(event.target.tagName);//event是原生的DOM事件
+				},
+				say:function(txt,event){
+					//现在可以访问原生的事件对象
+					event.preventDefault();
+					alert(txt);
+				},
+				doThis:function(){
+
+				},
+				onsubmit:function(){
+
+				},
+				doThat:function(){
+					alert("只在父元素触发");
+				}
+			}
+		})
+		//vm.greet();
+	</script>
+</body>
+</html>
