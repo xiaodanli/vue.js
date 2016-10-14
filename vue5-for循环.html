@@ -3,6 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style>
+		.line{
+			text-decoration: line-through;
+		}
+	</style>
 </head>
 <body id="demo">
 	<!-- 数组v-for -->
@@ -42,6 +47,10 @@
 	<div>
 		<span v-for="n in 10">{{n}}</span>
 	</div>
+
+	<ul>
+		<li :class="task.complete ? 'line' :''" @click="taskFun(task)" v-for="task in tasks">{{task.body}}</li>
+	</ul>
 	<script src="vue.js"></script>
 	<script>
 		var vm = new Vue({
@@ -57,12 +66,19 @@
 					lastname:'doe',
 					age:30
 				},
-				arrs:[]
+				arrs:[],
+				tasks:[
+					{body:'go to shop',complete:false},
+					{body:'go to eat',complete:true},
+					{body:'go to home',complete:false}
+				]
 			},
 			methods:{
 				del:function(){
-					alert();
 					this.items.$remove({message:'Foo'})
+				},
+				taskFun:function(task){
+					task.complete = !task.complete;
 				}
 			}
 		});
@@ -99,8 +115,6 @@
 		console.log(newstr4);
 		var newstr5 = str.replace(/hello/i,"Hello");
 		console.log(newstr5);
-
-
 	</script>
 </body>
 </html>

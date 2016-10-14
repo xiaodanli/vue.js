@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>组件</title>
+</head>
+<body>
+	<!-- 实例化放在最后 -->
+	<div id="app">
+		<counter heading="like" color="green"></counter>
+		<counter heading="dislike" color="red"></counter>
+	</div>
+	<template id="counter-template">
+		<h1>{{heading}}</h1>
+		<button @click="count += 1" style='background:{{color}}'>{{count}}</button>
+	</template>
+	<script src="http://cdn.bootcss.com/vue/1.0.14/vue.js"></script>
+	<script>
+		Vue.component('counter',{
+			template:"#counter-template",
+			props:['heading','color'],
+			data:function(){
+				return {count:0}
+			}
+		})
+		new Vue({
+			el:"#app"
+		});
+	</script>
+</body>
+</html>

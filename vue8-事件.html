@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<!--禁止表单提交跳转页面，两种方法：
+		1.v-on:submit.prevent
+		2.e.preventDefault();
+	  -->
+	<div id="app">
+		<form action="demo.html" @submit.prevent="submitForm">
+			<button type="submit">submit</button>
+		</form>
+		<button v-on:click="plusFun">自加{{count}}</button>
+		<button @click="minusFun">自减{{minus}}</button>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				count:1,
+				minus:10
+			},
+			methods:{
+				"submitForm":function(e) {
+					alert("submit");
+					//e.preventDefault();
+				},
+				"plusFun":function(){
+					this.count += 1;
+				},
+				"minusFun":function(){
+					this.minus -= 1;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

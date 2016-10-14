@@ -10,6 +10,7 @@
 	</style>
 </head>
 <body id="example">
+	<!-- 显示为字符串 -->
 	<h1 class="red">{{{a}}}</h1>
 	<span>{{num+1}}</span>
 	<span>{{ok?'Yes':'no'}}</span>
@@ -19,6 +20,11 @@
 	<div>
 		b = {{b}},c={{c}}
 	</div>
+	<!-- v-if不符合不渲染元素  v-show会渲染 它是通过display来控制元素显示隐藏-->
+	<div class="red" v-show="!textValue">输入框不能为空</div>
+	<div class="red" v-if="!textValue">输入框不能为空</div>
+	<textarea cols="30" rows="10" v-model="textValue"></textarea>
+	<span>{{textValue}}</span>
 	<script src="vue.js"></script>
 	<script>
 		var data = {
@@ -43,7 +49,6 @@
 		console.log(data.a);
 		data.a = 3;
 		console.log(vm.a);*/
-
 	</script>
 </body>
 </html>

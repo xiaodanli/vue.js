@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>组件</title>
+	<style>
+		.line{
+			text-decoration: line-through;
+		}
+	</style>
+</head>
+<body>
+	<!-- 实例化放在最后 -->
+	<div id="app">
+		<task-app :list="tasks"></task-app>
+		<task-app :list="[{body:'go to shop',complete:false}]"></task-app>
+	</div>
+	<template id="tasks-template">
+		<h1>My tasks <span v-show="remainder">({{remainder}})</span></h1>
+		<ul>
+			<li 
+				:class="task.complete ? 'line' :''" 
+				@click="taskFun(task)" 
+				v-for="task in list">
+				{{task.body}}
+				<span @click="delFun(task)">X</span>
+			</li>
+		</ul>
+	</template>
+	<script src="http://cdn.bootcss.com/vue/1.0.14/vue.js"></script>
+	<script>
+		Vue.component('task-app',{
+			template:"#tasks-template",
+			props:['list'],
+			methods:{
+				taskFun:function(task){
+					task.complete = !task.complete;
+				},
+				delFun:function(task){
+					console.log(task);
+					this.list.$remove(task);
+				}
+			},
+			computed:{
+				remainder:function(){
+					return this.list.filter(function(task){
+						return !task.complete
+					}).length
+				}
+			}
+		})
+		new Vue({
+			el:"#app",
+			data:{
+				tasks:[
+					{body:'go to shop',complete:false},
+					{body:'go to eat',complete:true},
+					{body:'go to home',complete:false}
+				]
+			}
+		});
+	</script>
+</body>
+</html>

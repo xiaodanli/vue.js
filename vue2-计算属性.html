@@ -5,16 +5,19 @@
 	<title>Document</title>
 </head>
 <body id="demo">
+	Level {{ level}}
 	<div>{{fullname}}</div>
 	<input type="text" v-model="firstname">
 	<input type="text" v-model="lastname">
 	<script src="vue.js"></script>
 	<script>
+		/*computed使计算属性的，可以将业务逻辑和代码逻辑放在这里面*/
 		var vm = new Vue({
 			el:"#demo",
 			data:{
 				firstname:"Foo",
-				lastname:"Bar"
+				lastname:"Bar",
+				level:80
 			},
 			computed:{
 				fullname:{
@@ -26,6 +29,13 @@
 						this.firstname = names[0];
 						this.lastname = names[names.length - 1];
 					}
+				},
+				level:function(){
+					if(this.points <= 100){
+						return "普通会员"
+					}else{
+						return "VIP会员"
+					}
 				}
 			}
 		});
@@ -36,8 +46,6 @@
 		vm.$watch("lastname",function(val){
 			this.fullname = this.firstname + ' '+val;
 		});*/
-		
-		
 	</script>
 </body>
 </html>
